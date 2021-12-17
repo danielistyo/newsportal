@@ -10,7 +10,7 @@ function request<R>(path: string, params?: { [key: string]: string }): Promise<R
     ...params,
     apiKey: '099148be22804e849a0c6fe022b7cf5e',
   };
-  if (!params?.sources) combinedParams.country = 'us';
+  if (!params?.sources && !params?.q) combinedParams.country = 'us';
 
   const queries = new URLSearchParams(combinedParams);
   res = fetch(`${BASE_URL}${path}?${queries}`);
