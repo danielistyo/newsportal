@@ -13,14 +13,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
+import { RootStates } from './typings';
 
 export default defineComponent({
   name: 'App',
-
-  data() {
-    return {
-      //
-    };
+  setup() {
+    const store = useStore<RootStates>();
+    store.dispatch('getHeadlines');
+    store.dispatch('getHeadlineSources');
   },
 });
 </script>
