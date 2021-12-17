@@ -12,3 +12,6 @@ This repo is using Vue-CLI to create headline news website.
 yarn install
 yarn serve
 ```
+## Screenshots
+- https://ibb.co/Kw5Ns4z
+- https://ibb.co/SXJ9p7n
