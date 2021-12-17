@@ -5,7 +5,13 @@
       <v-spacer></v-spacer>
 
       <template v-if="$route.name === 'List'">
-        <v-btn class="mr-4 ml-5" color="surface" plain @click="filterDialog = true">
+        <v-btn
+          class="mr-4 ml-5 button-filter"
+          color="surface"
+          plain
+          @click="filterDialog = true"
+          size="small"
+        >
           <v-icon left icon="mdi-filter"></v-icon>
           <span>Filter</span>
         </v-btn>
@@ -44,5 +50,17 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container-app {
   max-width: 900px;
+}
+
+::v-deep() {
+  .v-app-bar__content {
+    max-width: 900px;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .v-app-bar-title {
+    padding: 6px 5px;
+  }
 }
 </style>
