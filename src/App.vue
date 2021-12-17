@@ -20,7 +20,11 @@
     </v-app-bar>
     <v-main>
       <v-container class="container-app">
-        <router-view />
+        <router-view v-if="!isError" />
+        <div v-else class="container-app__error">
+          <v-icon>mdi-alert-circle</v-icon> There's something wrong. Please reload page or contact
+          administrators.
+        </div>
       </v-container>
     </v-main>
   </v-app>
@@ -29,7 +33,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
-import { RootStates } from './typings';
+import { HeadlinesResponse, RootStates } from './typings';
 import FilterNews from '@/components/FilterNews';
 
 export default defineComponent({
@@ -37,12 +41,15 @@ export default defineComponent({
   components: { FilterNews },
   setup() {
     const store = useStore<RootStates>();
-    store.dispatch('getHeadlines');
+    const isError = ref(false);
+    store.dispatch('getHeadlines').then((res: HeadlinesResponse) => {
+      if (res.status === 'error') isError.value = true;
+    });
     store.dispatch('getHeadlineSources');
 
     const filterDialog = ref(false);
 
-    return { filterDialog };
+    return { filterDialog, isError };
   },
 });
 </script>
@@ -50,6 +57,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container-app {
   max-width: 900px;
+
+  &__error {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+  }
 }
 
 ::v-deep() {

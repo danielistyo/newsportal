@@ -43,6 +43,7 @@ export default createStore<RootStates>({
         commit('setHeadlines', res.articles);
       }
       commit('setIsFetchingHeadline', false);
+      return res;
     },
     async getHeadlineSources({ commit }) {
       const res = await api.getHeadlineSources();

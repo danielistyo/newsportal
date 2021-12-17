@@ -27,11 +27,19 @@ export type Headline = {
   content: string;
 };
 
-export type HeadlinesResponse = {
-  status: string;
+export type HeadlineResponseSuccess = {
+  status: 'ok';
   totalResults: number;
   articles: Array<Headline>;
 };
+
+export type HeadlineResponseError = {
+  code: string;
+  message: string;
+  status: 'error';
+};
+
+export type HeadlinesResponse = HeadlineResponseSuccess | HeadlineResponseError;
 
 export type RootStates = {
   isFetchingHeadline: boolean;
