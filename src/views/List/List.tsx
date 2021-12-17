@@ -5,6 +5,7 @@ import { computed, defineComponent } from 'vue';
 import HeadlineNewsCard from '@/components/HeadlineNewsCard';
 import './List.scss';
 import { RootStates } from '@/typings';
+import HeadlineNewsSkeleton from '@/components/HeadlineNewsCard/HeadlineNewsSkeleton';
 
 export default defineComponent({
   name: 'ListPage',
@@ -14,6 +15,12 @@ export default defineComponent({
     const headlines = computed(() => store.state.headlines);
     return () => (
       <VRow dense class="news-list">
+        {isLoading.value
+          && [1, 2, 3].map(() => (
+            <VCol sm={4} class="news-list__col">
+              <HeadlineNewsSkeleton />
+            </VCol>
+          ))}
         {headlines.value.map((headline) => (
           <VCol sm={4} class="news-list__col">
             <HeadlineNewsCard

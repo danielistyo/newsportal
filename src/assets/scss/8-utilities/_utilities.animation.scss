@@ -1,0 +1,26 @@
+// ==========================================================================
+// Animation
+// ==========================================================================
+
+$global-color-sand-light: #e2e2e2;
+$global-color-sand-dark: rgba(20, 20, 20, 0.12);
+
+.u- {
+  &loading-gradient {
+    animation: a-background-move 1.5s infinite;
+    background-image: linear-gradient(
+      90deg,
+      $global-color-sand-light,
+      $global-color-sand-dark,
+      $global-color-sand-light
+    );
+    background-size: 200%;
+    background-color: #e2e2e2;
+    min-height: 6px;
+    min-width: 12px;
+
+    &--white {
+      background-image: linear-gradient(90deg, #fff, #eee, #fff);
+    }
+  }
+}
