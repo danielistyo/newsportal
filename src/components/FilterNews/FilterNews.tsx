@@ -5,6 +5,7 @@ import {
 import { useStore } from 'vuex';
 import { RootStates } from '@/typings';
 import './FilterNews.scss';
+import eventBus from '@/eventBus';
 
 export default defineComponent({
   name: 'FilterNews',
@@ -48,7 +49,11 @@ export default defineComponent({
     const handleFilter = () => {
       store.dispatch('getHeadlines', source.value === 'all' ? {} : { source: source.value });
       emit('update:modelValue', false);
+      eventBus.emit('filter-click');
     };
+    eventBus.on('search-click', () => {
+      store.commit('setSelectedSource', 'all');
+    });
 
     return () => (
       <VDialog v-model={value.value} class="filter-news">

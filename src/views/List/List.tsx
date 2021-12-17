@@ -11,6 +11,7 @@ import './List.scss';
 import { RootStates } from '@/typings';
 import HeadlineNewsSkeleton from '@/components/HeadlineNewsCard/HeadlineNewsSkeleton';
 import HeadlineNewsEditDialog from '@/components/HeadlineNewsEditDialog';
+import eventBus from '@/eventBus';
 
 export default defineComponent({
   name: 'ListPage',
@@ -22,14 +23,24 @@ export default defineComponent({
     const selectedHeadline = computed(() => store.state.selectedHeadline);
     const editDialogModel = computed(() => !!selectedHeadline.value);
 
-    const handleInputSearch = debounce((e: Event) => {
+    const handleInputSearch = debounce(async (e: Event) => {
       const query = (e.target as HTMLInputElement).value;
-      store.dispatch('getHeadlines', query === '' ? {} : { query });
+      await store.dispatch('getHeadlines', query === '' ? {} : { query });
+      eventBus.emit('search-click');
     }, 1500);
+
+    const searchbox = ref(null);
+    eventBus.on('filter-click', () => {
+      searchbox.value = null;
+    });
 
     return () => (
       <>
-        <VTextField label="Search here..." onInput={handleInputSearch}></VTextField>
+        <VTextField
+          v-model={searchbox.value}
+          label="Search here..."
+          onInput={handleInputSearch}
+        ></VTextField>
         <HeadlineNewsEditDialog
           v-model={editDialogModel.value}
           news={selectedHeadline.value || undefined}
