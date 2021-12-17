@@ -8,6 +8,7 @@ export default createStore<RootStates>({
     headlines: [],
     headlineSources: [],
     selectedSource: 'all',
+    selectedHeadline: null,
   },
   mutations: {
     setHeadlines(state, headlines: Array<Headline>) {
@@ -24,6 +25,14 @@ export default createStore<RootStates>({
     },
     setSelectedSource(state, value) {
       state.selectedSource = value;
+    },
+    setSelectedHeadline(state, url) {
+      const headline = state.headlines.find((hd) => hd.url === url);
+      state.selectedHeadline = headline || null;
+    },
+    updateTitleHeadline(state, { title, url }) {
+      const headline = state.headlines.find((hd) => hd.url === url);
+      if (headline) headline.title = title;
     },
   },
   actions: {

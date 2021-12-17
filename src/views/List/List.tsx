@@ -10,6 +10,7 @@ import HeadlineNewsCard from '@/components/HeadlineNewsCard';
 import './List.scss';
 import { RootStates } from '@/typings';
 import HeadlineNewsSkeleton from '@/components/HeadlineNewsCard/HeadlineNewsSkeleton';
+import HeadlineNewsEditDialog from '@/components/HeadlineNewsEditDialog';
 
 export default defineComponent({
   name: 'ListPage',
@@ -18,6 +19,8 @@ export default defineComponent({
     const store = useStore<RootStates>();
     const isLoading = computed(() => store.state.isFetchingHeadline);
     const headlines = computed(() => store.state.headlines);
+    const selectedHeadline = computed(() => store.state.selectedHeadline);
+    const editDialogModel = computed(() => !!selectedHeadline.value);
 
     const handleInputSearch = debounce((e: Event) => {
       const query = (e.target as HTMLInputElement).value;
@@ -27,6 +30,10 @@ export default defineComponent({
     return () => (
       <>
         <VTextField label="Search here..." onInput={handleInputSearch}></VTextField>
+        <HeadlineNewsEditDialog
+          v-model={editDialogModel.value}
+          news={selectedHeadline.value || undefined}
+        />
         <VRow dense class="news-list">
           {isLoading.value
             ? [1, 2, 3].map(() => (

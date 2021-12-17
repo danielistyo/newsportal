@@ -1,0 +1,24 @@
+.edit-dialog {
+  &__card {
+    padding: 12px;
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+  }
+
+  &__input {
+    width: 100%;
+    outline: none;
+    display: block;
+    padding: 8px;
+    margin-bottom: 12px;
+    background-color: #ddd;
+  }
+
+  &__error {
+    color: red;
+    font-size: 10px;
+  }
+}

@@ -47,6 +47,18 @@
     background-color: #fff;
     cursor: pointer;
     outline: none;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  &__edit {
+    position: absolute;
+    z-index: 100;
+    font-size: 24px;
+    right: left;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
     color: #fff;
   }
 }

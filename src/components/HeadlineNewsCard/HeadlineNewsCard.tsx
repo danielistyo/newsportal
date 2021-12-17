@@ -1,8 +1,11 @@
 import {
   VCard, VCardTitle, VCardSubtitle, VIcon,
 } from 'vuetify/lib/components';
+import { useStore } from 'vuex';
+import { RootStates } from '@/typings';
 import CustomImage from '../CustomImage';
 import './HeadlineNewsCard.scss';
+import HeadlineNewsEdit from './HeadlineNewsEdit';
 import HeadlineNewsGo from './HeadlineNewsGo';
 
 export default (
@@ -25,8 +28,13 @@ export default (
 ): JSX.Element => {
   const MAX_SUBTITLE = 100;
   const slicedSubtitle = subtitle && subtitle.length > MAX_SUBTITLE ? `${subtitle.slice(0, MAX_SUBTITLE)}...` : subtitle;
+  const store = useStore<RootStates>();
+  const handleEdit = (newsUrl: string) => {
+    store.commit('setSelectedHeadline', newsUrl);
+  };
   return (
     <VCard maxWidth={400} class="news-card">
+      <HeadlineNewsEdit class="news-card__edit" onClick={() => handleEdit(url)} />
       <a class="news-card__go" href={url} target="_blank">
         <HeadlineNewsGo />
       </a>

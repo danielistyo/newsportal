@@ -38,4 +38,5 @@ export type RootStates = {
   headlines: Array<Headline>;
   headlineSources: Array<HeadlineSource>;
   selectedSource: string;
+  selectedHeadline: Headline | null;
 };
