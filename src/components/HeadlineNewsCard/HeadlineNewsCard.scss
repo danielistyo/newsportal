@@ -39,4 +39,14 @@
     padding: 0 16px;
     justify-content: space-between;
   }
+
+  &__go {
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+  }
 }

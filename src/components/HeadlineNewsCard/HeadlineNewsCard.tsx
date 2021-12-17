@@ -3,6 +3,7 @@ import {
 } from 'vuetify/lib/components';
 import CustomImage from '../CustomImage';
 import './HeadlineNewsCard.scss';
+import HeadlineNewsGo from './HeadlineNewsGo';
 
 export default (
   {
@@ -26,6 +27,9 @@ export default (
   const slicedSubtitle = subtitle && subtitle.length > MAX_SUBTITLE ? `${subtitle.slice(0, MAX_SUBTITLE)}...` : subtitle;
   return (
     <VCard maxWidth={400} class="news-card">
+      <a class="news-card__go" href={url} target="_blank">
+        <HeadlineNewsGo />
+      </a>
       <CustomImage src={imgUrl} customClass="news-card__img" onClick={onReadClick} />
       <VCardTitle class="news-card__title" onClick={onReadClick}>
         {title}

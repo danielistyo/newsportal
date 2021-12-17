@@ -8,7 +8,7 @@ function request<R>(path: string, params?: { [key: string]: string }): Promise<R
 
   const combinedParams: { [key: string]: string } = {
     ...params,
-    apiKey: '099148be22804e849a0c6fe022b7cf5e',
+    apiKey: '6be47f3d90504d7dba392bb3d86b74cc',
   };
   if (!params?.sources && !params?.q) combinedParams.country = 'us';
 
