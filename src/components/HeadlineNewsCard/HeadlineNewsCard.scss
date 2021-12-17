@@ -20,12 +20,6 @@
     display: inline-block;
   }
 
-  &__readmore {
-    font-weight: bold;
-    border-bottom: dotted 1px;
-    cursor: pointer;
-  }
-
   &__date {
     font-size: 12px;
     font-weight: bold;
@@ -34,6 +28,7 @@
 
   &__read {
     font-weight: bold;
+    cursor: pointer;
     font-size: 14px;
     color: rgb(95 103 148);
   }
