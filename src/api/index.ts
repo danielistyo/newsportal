@@ -6,11 +6,13 @@ const BASE_URL = 'https://newsapi.org/v2';
 function request<R>(path: string, params?: { [key: string]: string }): Promise<R> {
   let res: Promise<Response> | null = null;
 
-  const queries = new URLSearchParams({
+  const combinedParams: { [key: string]: string } = {
     ...params,
-    country: 'us',
     apiKey: '099148be22804e849a0c6fe022b7cf5e',
-  });
+  };
+  if (!params?.sources) combinedParams.country = 'us';
+
+  const queries = new URLSearchParams(combinedParams);
   res = fetch(`${BASE_URL}${path}?${queries}`);
   return res
     .then((rawRes) => rawRes.json())
@@ -20,8 +22,11 @@ function request<R>(path: string, params?: { [key: string]: string }): Promise<R
 }
 
 export default {
-  getHeadlines(): Promise<HeadlinesResponse> {
-    return request<HeadlinesResponse>('/top-headlines', { pageSize: '100' });
+  getHeadlines(params: { source?: string; query?: string }): Promise<HeadlinesResponse> {
+    const queries: { [key: string]: string } = { pageSize: '100' };
+    if (params.source) queries.sources = params.source;
+    if (params.query) queries.q = params.query;
+    return request<HeadlinesResponse>('/top-headlines', queries);
   },
   getHeadlineSources(): Promise<HeadlineSourcesResponse> {
     return request<HeadlineSourcesResponse>('/top-headlines/sources');

@@ -37,4 +37,5 @@ export type RootStates = {
   isFetchingHeadline: boolean;
   headlines: Array<Headline>;
   headlineSources: Array<HeadlineSource>;
+  selectedSource: string;
 };

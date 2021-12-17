@@ -1,0 +1,13 @@
+.v-dialog.filter-news {
+  $filterNews: '.filter-news';
+  text-align: center;
+
+  #{$filterNews}__card {
+    padding-bottom: 12px;
+  }
+
+  #{$filterNews}__sources {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+}

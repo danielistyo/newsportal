@@ -7,6 +7,7 @@ export default createStore<RootStates>({
     isFetchingHeadline: false,
     headlines: [],
     headlineSources: [],
+    selectedSource: 'all',
   },
   mutations: {
     setHeadlines(state, headlines: Array<Headline>) {
@@ -21,11 +22,14 @@ export default createStore<RootStates>({
     setIsFetchingHeadline(state, value) {
       state.isFetchingHeadline = value;
     },
+    setSelectedSource(state, value) {
+      state.selectedSource = value;
+    },
   },
   actions: {
-    async getHeadlines({ commit }) {
+    async getHeadlines({ commit }, params: { source: string; query: string }) {
       commit('setIsFetchingHeadline', true);
-      const res = await api.getHeadlines();
+      const res = await api.getHeadlines(params || {});
       if (res.status === 'ok') {
         commit('setHeadlines', res.articles);
       }
