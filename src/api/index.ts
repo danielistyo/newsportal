@@ -21,7 +21,7 @@ function request<R>(path: string, params?: { [key: string]: string }): Promise<R
 
 export default {
   getHeadlines(): Promise<HeadlinesResponse> {
-    return request<HeadlinesResponse>('/top-headlines');
+    return request<HeadlinesResponse>('/top-headlines', { pageSize: '100' });
   },
   getHeadlineSources(): Promise<HeadlineSourcesResponse> {
     return request<HeadlineSourcesResponse>('/top-headlines/sources');
