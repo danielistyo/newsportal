@@ -1,7 +1,7 @@
 <template>
   <v-app theme="CustomTheme">
     <v-app-bar color="rgb(167 176 221)" absolute dark>
-      <v-app-bar-title>Headline News</v-app-bar-title>
+      <v-app-bar-title><v-icon>mdi-file-document-outline</v-icon>Headline News</v-app-bar-title>
     </v-app-bar>
     <v-main>
       <v-container class="container-app">
