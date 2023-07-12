@@ -12,6 +12,22 @@
     color: rgb(87, 87, 87);
   }
 
+  &__date,
+  &__author {
+    .v-icon {
+      vertical-align: text-top;
+    }
+  }
+
+  &__author {
+    color: #000;
+    font-weight: bold;
+  }
+
+  &__date {
+    font-size: 15px;
+  }
+
   &__image {
     margin-top: 16px;
     width: 100%;

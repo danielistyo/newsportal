@@ -3,7 +3,7 @@ import {
 } from 'vue';
 import {
   VBtn, VDialog, VCard, VCardTitle,
-} from 'vuetify/lib/components';
+} from 'vuetify/components';
 import { useStore } from 'vuex';
 import { Headline, RootStates } from '@/typings';
 import './HeadlineNewsEditDialog.scss';
@@ -44,14 +44,14 @@ export default defineComponent({
 
     const handleEdit = () => {
       if (!isErrorLength.value) {
-        store.commit('updateTitleHeadline', { title: title.value, url: props.news?.url });
-        store.commit('setSelectedHeadline', null);
+        store.commit('headlines/updateTitle', { title: title.value, url: props.news?.url });
+        store.commit('headlines/setSelected', null);
       }
     };
 
     return () => (
-      <VDialog v-model={value.value} class="edit-dialog">
-        <VCard maxWidth={400} class="edit-dialog__card">
+      <VDialog v-model={value.value} class="edit-dialog" width="auto">
+        <VCard class="edit-dialog__card" width="400">
           <VCardTitle>Edit Title</VCardTitle>
           <textarea v-model={title.value} class="edit-dialog__input" />
           {isErrorLength.value && <p class="edit-dialog__error">Max 200 characters</p>}
@@ -59,7 +59,7 @@ export default defineComponent({
             <VBtn
               color="error"
               onClick={() => {
-                store.commit('setSelectedHeadline', null);
+                store.commit('headlines/setSelected', null);
               }}
               size="small"
             >

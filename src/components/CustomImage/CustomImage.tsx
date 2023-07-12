@@ -1,4 +1,4 @@
-import { VImg } from 'vuetify/lib/components';
+import { VImg } from 'vuetify/components';
 
 export default ({
   customClass,

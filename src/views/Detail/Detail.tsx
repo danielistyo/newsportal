@@ -1,8 +1,15 @@
+/* eslint-disable implicit-arrow-linebreak */
 import dayjs from 'dayjs';
 import { computed, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { VIcon, VBtn } from 'vuetify/lib/components';
+import {
+  VIcon,
+  VBreadcrumbs,
+  VBreadcrumbsItem,
+  VBreadcrumbsDivider,
+  VBtn,
+} from 'vuetify/lib/components';
 import { RootStates } from '@/typings';
 import './Detail.scss';
 
@@ -12,28 +19,33 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore<RootStates>();
     const newsUrl = useRoute().params.url;
-    const selectedNews = computed(() => store.state.headlines.find((news) => news.url === newsUrl));
+    const selectedNews = computed(() =>
+      store.state.headlines.data.find((news) => news.url === newsUrl));
 
     // redirect to list page when there is no any headlines yet
-    if (!store.state.headlines.length) {
+    if (!store.state.headlines.data.length) {
       router.replace({ name: 'List' });
     }
     if (!selectedNews.value) return () => <div>Loading...</div>;
 
     return () => (
       <div class="detail-page">
+        <VBreadcrumbs>
+          <VIcon size="small">mdi-home</VIcon>
+          <VBreadcrumbsItem to={{ path: '/' }}>Home</VBreadcrumbsItem>
+          <VBreadcrumbsDivider>/</VBreadcrumbsDivider>
+          <VBreadcrumbsItem active>News</VBreadcrumbsItem>
+        </VBreadcrumbs>
         <h3 class="detail-page__title">{selectedNews.value?.title}</h3>
         <div class="detail-page__subtitle">
-          <div class="detail-page__date">
-            <VIcon>mdi-calendar-blank</VIcon>
-            {dayjs(selectedNews.value?.publishedAt).format('DD MMM YYYY')}
-          </div>
           {selectedNews.value?.author && (
             <div class="detail-page__author">
-              <VIcon>mdi-account</VIcon>
               {selectedNews.value?.author} - {selectedNews.value?.source.name}
             </div>
           )}
+          <div class="detail-page__date">
+            {dayjs(selectedNews.value?.publishedAt).format('DD MMM YYYY')}
+          </div>
         </div>
         <img src={selectedNews.value?.urlToImage} alt="image" class="detail-page__image" />
         <h3 class="detail-page__description">{selectedNews.value?.description}</h3>

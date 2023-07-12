@@ -37,34 +37,34 @@ export default defineComponent({
         language: '',
         country: '',
       },
-    ].concat(store.state.headlineSources));
+    ].concat(store.state.headlines.sources));
     const source = computed({
       get() {
-        return store.state.selectedSource;
+        return store.state.headlines.selectedSource;
       },
       set(val) {
-        store.commit('setSelectedSource', val);
+        store.commit('headlines/setSelectedSource', val);
       },
     });
     const handleFilter = () => {
-      store.dispatch('getHeadlines', source.value === 'all' ? {} : { source: source.value });
+      store.dispatch('headlines/get', source.value === 'all' ? {} : { source: source.value });
       emit('update:modelValue', false);
       eventBus.emit('filter-click');
     };
     eventBus.on('search-click', () => {
-      store.commit('setSelectedSource', 'all');
+      store.commit('headlines/setSelectedSource', 'all');
     });
 
     return () => (
-      <VDialog v-model={value.value} class="filter-news">
-        <VCard maxWidth={400} class="filter-news__card">
+      <VDialog v-model={value.value} class="filter-news" width="auto">
+        <VCard maxWidth={400} minWidth={350} class="filter-news__card">
           <VCardTitle>Filter News</VCardTitle>
           <VRadioGroup v-model={source.value} column class="filter-news__sources">
             {sources.value.map((src) => (
               <VRadio label={src.name} color="red" value={src.id}></VRadio>
             ))}
           </VRadioGroup>
-          <VBtn color="primary" onClick={handleFilter}>
+          <VBtn color="primary" onClick={handleFilter} class="filter-news__button">
             Filter
           </VBtn>
         </VCard>
