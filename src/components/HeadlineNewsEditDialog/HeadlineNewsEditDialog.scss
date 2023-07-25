@@ -1,6 +1,14 @@
 .edit-dialog {
   &__card {
     padding: 12px;
+    width: 300px;
+
+    @media screen and (min-width: 500px) {
+      width: 400px;
+    }
+    @media screen and (min-width: 768px) {
+      width: 500px;
+    }
   }
   &__footer {
     display: flex;

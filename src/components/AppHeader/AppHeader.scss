@@ -1,0 +1,13 @@
+.app-header {
+  color: #fff;
+  &__title {
+    padding: 6px 5px;
+    min-width: 175px;
+    cursor: pointer;
+  }
+
+  &__history {
+    margin-inline-end: 16px;
+    cursor: pointer;
+  }
+}

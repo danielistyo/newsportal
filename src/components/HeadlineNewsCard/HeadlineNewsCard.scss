@@ -4,6 +4,12 @@
     margin: 12px 4px;
   }
 
+  @media screen and (max-width: 600px) {
+    &.v-card {
+      margin: auto;
+    }
+  }
+
   .v-img__img {
     transform: scale(1);
   }
@@ -18,11 +24,20 @@
   &__title {
     cursor: pointer;
     font-weight: bold;
+    -webkit-line-clamp: 3;
+    height: 73px;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 19px;
+    line-height: 21px;
+    margin-bottom: 7px;
   }
   &__img {
     cursor: pointer;
     height: 150px;
-    > img {
+    &:deep(.v-img__img) {
       height: 150px;
       width: 100%;
       object-fit: cover;

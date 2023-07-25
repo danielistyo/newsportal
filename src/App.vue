@@ -1,55 +1,46 @@
 <template>
-  <v-app theme="CustomTheme">
-    <v-app-bar color="rgb(167 176 221)" absolute dark>
-      <v-app-bar-title><v-icon>mdi-file-document-outline</v-icon>Headline News</v-app-bar-title>
-      <v-spacer></v-spacer>
-
-      <template v-if="$route.name === 'List'">
-        <v-btn
-          class="mr-4 ml-5 button-filter"
-          color="surface"
-          plain
-          @click="filterDialog = true"
-          size="small"
-        >
-          <v-icon left icon="mdi-filter"></v-icon>
-          <span>Filter</span>
-        </v-btn>
-        <filter-news v-model="filterDialog" />
-      </template>
-    </v-app-bar>
-    <v-main>
-      <v-container class="container-app">
+  <VApp theme="CustomTheme">
+    <AppHeader/>
+    <VMain>
+      <VContainer class="container-app">
         <router-view v-if="!isError" />
         <div v-else class="container-app__error">
-          <v-icon>mdi-alert-circle</v-icon> There's something wrong. Please reload page or contact
-          administrators.
+          <VIcon>mdi-alert-circle</VIcon> There's something wrong. Please reload page or contact administrators.
         </div>
-      </v-container>
-    </v-main>
-  </v-app>
+      </VContainer>
+    </VMain>
+  </VApp>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
-import { HeadlinesResponse, RootStates } from './typings';
-import FilterNews from '@/components/FilterNews';
+import {
+  VApp, VIcon, VContainer, VMain,
+} from 'vuetify/components';
+import AppHeader from '@/components/AppHeader';
 
 export default defineComponent({
   name: 'App',
-  components: { FilterNews },
+  components: {
+    VApp,
+    AppHeader,
+    VIcon,
+    VContainer,
+    VMain,
+  },
   setup() {
-    const store = useStore<RootStates>();
+    const store = useStore();
     const isError = ref(false);
-    store.dispatch('getHeadlines').then((res: HeadlinesResponse) => {
+
+    // fetch news from API
+    store.dispatch('headlines/get').then((res) => {
       if (res.status === 'error') isError.value = true;
     });
-    store.dispatch('getHeadlineSources');
+    // fetch news source as well
+    store.dispatch('sources/get');
 
-    const filterDialog = ref(false);
-
-    return { filterDialog, isError };
+    return { isError };
   },
 });
 </script>
@@ -70,10 +61,6 @@ export default defineComponent({
     max-width: 900px;
     justify-content: center;
     margin: auto;
-  }
-
-  .v-app-bar-title {
-    padding: 6px 5px;
   }
 }
 </style>

@@ -1,17 +1,15 @@
-.v-dialog.filter-news {
-  $filterNews: '.filter-news';
-  text-align: center;
+.filter-news {
+  display: flex;
 
-  #{$filterNews}__card {
-    padding-bottom: 12px;
-  }
+  &__button-filter {
+    background-color: #fff;
+    width: 50px;
+    height: 56px;
+    border: solid 1px rgb(31, 39, 82);
+    box-shadow: none;
 
-  #{$filterNews}__sources {
-    max-height: 200px;
-    overflow-y: auto;
-  }
-
-  #{$filterNews}__button {
-    margin: 0 10px;
+    &:deep(.mdi-filter) {
+      color: rgb(31, 39, 82);
+    }
   }
 }

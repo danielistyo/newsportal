@@ -1,0 +1,20 @@
+.history-news {
+  &__col {
+    > * {
+      margin: auto;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    &__col {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  @media (min-width: 601px) and (max-width: 780px) {
+    &__col {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+}
