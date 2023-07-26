@@ -12,8 +12,9 @@ This repo is using Vue-CLI to create headline news website.
 ## prerequisite
 
 - Node v18.16.1
+- Yarn 1.22.19
 
-## Project setup
+## Run development server
 
 ```
 yarn install
