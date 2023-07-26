@@ -5,8 +5,8 @@
       <textarea v-model="title" class="edit-dialog__input" />
       <p v-if="isErrorLength" class="edit-dialog__error">Max 200 characters</p>
       <div class="edit-dialog__footer">
-        <VBtn color="error" @click="handleCancel" size="small"> Cancel </VBtn>
-        <VBtn color="primary" @click="handleEdit" size="small"> Edit </VBtn>
+        <VBtn color="error" @click="handleCancel" size="small" class="edit-dialog__button-cancel"> Cancel </VBtn>
+        <VBtn color="primary" @click="handleEdit" size="small" class="edit-dialog__button-edit"> Edit </VBtn>
       </div>
     </VCard>
   </VDialog>

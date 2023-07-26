@@ -1,7 +1,10 @@
 module.exports = {
-  preset: '@vue/cli-plugin-unit-jest/presets/typescript-and-babel',
-  transform: {
-    '^.+\\.vue$': '@vue/vue3-jest',
+  preset: '@vue/cli-plugin-unit-jest',
+  moduleNameMapper: {
+    '^vuetify/components$': '<rootDir>/node_modules/vuetify/lib/components/index.mjs',
+    '^vuetify/lib/components$': '<rootDir>/node_modules/vuetify/lib/components/index.mjs',
+    '^vuetify/directives$': '<rootDir>/node_modules/vuetify/lib/directives/index.mjs',
   },
-  resolver: './resolver.js',
+  transformIgnorePatterns: ['node_modules/(?!vuetify)'],
+  setupFilesAfterEnv: ['./tests/setup.js'],
 };

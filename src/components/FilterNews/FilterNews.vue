@@ -1,12 +1,21 @@
 <template>
   <div class="filter-news">
-    <VTextField v-model="searchbox" label="Search here..." @input="handleInputSearch"></VTextField>
+    <VTextField
+      v-model="searchbox"
+      class="filter-news__input"
+      label="Search here..."
+      @input="handleInputSearch"
+    ></VTextField>
     <VBtn class="mr-4 ml-5 filter-news__button-filter" plain @click="filterDialog = true" size="small">
       <VIcon left icon="mdi-filter" size="x-large"></VIcon>
     </VBtn>
     <FilterNewsDialog v-model="filterDialog" />
   </div>
-  <VChip v-if="filterSource && filterSource.toLowerCase() !== 'all'" class="ma-2" color="primary">
+  <VChip
+    v-if="filterSource && filterSource.toLowerCase() !== 'all'"
+    class="ma-2 filter-news__source-label"
+    color="primary"
+  >
     Source: {{ filterSource }}
   </VChip>
 </template>

@@ -3,7 +3,14 @@
     <VCard maxWidth="400" minWidth="300" class="filter-news-dialog__card">
       <VCardTitle>Filter News</VCardTitle>
       <VRadioGroup v-model="source" column class="filter-news-dialog__sources">
-        <VRadio v-for="src in sources" :key="src.id" :label="src.name" color="red" :value="src.id"></VRadio>
+        <VRadio
+          v-for="src in sources"
+          :key="src.id"
+          :label="src.name"
+          color="red"
+          :value="src.id"
+          class="filter-news-dialog__source"
+        />
       </VRadioGroup>
       <VBtn color="primary" :onClick="handleFilter" class="filter-news-dialog__button"> Filter </VBtn>
     </VCard>

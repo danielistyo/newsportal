@@ -46,14 +46,13 @@ export default {
     date: { type: String, required: true },
     url: { type: String, required: true },
     onReadClick: { type: Function, required: true },
-    hideEdit: { type: Boolean, default: true },
+    hideEdit: { type: Boolean, default: false },
   },
   setup(props) {
     const slicedSubtitle = sliceText(props.subtitle);
 
     const store = useStore();
     const handleEdit = (newsUrl) => {
-      console.log(newsUrl);
       store.commit('headlines/setSelected', newsUrl);
     };
     return {
