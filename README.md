@@ -1,18 +1,33 @@
 # newsportal
-This repo is using Vue-CLI to create headline news website. Due to Vuetify is still alpha version for supporting Vue 3, then I customized some Vuetify components to handle some cases.
+
+This repo is using Vue-CLI to create headline news website. 
 
 ## Tech Stack
+
 - Vue 3
 - Vuex
 - Vue Router
-- Typescript
 - Vuetify
 
+## prerequisite
+
+- Node v18.16.1
+
 ## Project setup
+
 ```
 yarn install
 yarn serve
 ```
+
+## Run Test
+
+```
+yarn test:unit
+```
+
 ## Screenshots
-- https://ibb.co/Kw5Ns4z
-- https://ibb.co/SXJ9p7n
+
+- https://ibb.co/cD45zL4
+- https://ibb.co/mNpPTyX
+- https://ibb.co/RcMBFww
