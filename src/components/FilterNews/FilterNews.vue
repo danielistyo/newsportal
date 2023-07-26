@@ -39,16 +39,21 @@ export default {
     const selectedSource = store.state.sources.data.find((s) => s.id === store.state.sources.selected);
     const filterSource = ref(selectedSource ? selectedSource.name : '');
 
+    const fetchNews = async (query) => {
+      const source = store.state.sources.selected === 'all' ? '' : store.state.sources.selected;
+      const params = { source, query };
+      store.dispatch('headlines/get', params);
+    };
+
     // to listen filter button click
     eventBus.on('filter-click', (source) => {
-      searchbox.value = null;
       filterSource.value = source;
+      fetchNews(searchbox.value);
     });
 
     const handleInputSearch = debounce(async (e) => {
       const query = e.target.value;
-      await store.dispatch('headlines/get', query === '' ? {} : { query });
-      eventBus.emit('search-click');
+      fetchNews(query);
     }, 1000);
 
     const filterDialog = ref(false);

@@ -76,15 +76,10 @@ export default defineComponent({
 
     // listener for filter button
     const handleFilter = () => {
-      // fetch news based on selected source
-      store.dispatch('headlines/get', source.value === 'all' ? {} : { source: source.value });
       emit('update:modelValue', false);
-      // trigger 'filter-click' event in order to show source news label and remove search query
+      // trigger 'filter-click' event in order to show source news label, remove search query, and fetch news
       eventBus.emit('filter-click', sources.value.find((s) => s.id === source.value).name);
     };
-    eventBus.on('search-click', () => {
-      store.commit('sources/setSelected', 'all');
-    });
 
     return {
       value,

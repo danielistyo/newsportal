@@ -5,7 +5,7 @@ function request(path, params) {
   let res = null;
   const combinedParams = {
     ...params,
-    apiKey: '6be47f3d90504d7dba392bb3d86b74cc',
+    apiKey: '00d4203931ff40c59951e7b98ef297bd',
   };
   if (params && !params.sources && !params.q) combinedParams.country = 'us';
 
@@ -24,6 +24,7 @@ export default {
     const queries = { pageSize: '100' };
     if (params.source) queries.sources = params.source;
     if (params.query) queries.q = params.query;
+
     return request('/top-headlines', queries);
   },
   getHeadlineSources() {
